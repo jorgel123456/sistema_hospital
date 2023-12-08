@@ -75,8 +75,8 @@ class modelUsuario {
         }
 
 
-        function registrarUsuario($usuario,$contrasena,$sexo,$rol){
-                $sql="call SP_REGISTRAR_USUARIO('$usuario','$contrasena','$sexo','$rol')";
+        function registrarUsuario($usuario,$contrasena,$sexo,$rol,$correo){
+                $sql="call SP_REGISTRAR_USUARIO('$usuario','$contrasena','$sexo','$rol','$correo')";
                 if($consulta=$this->conexion->conectar()->query($sql)){
                         if($row= mysqli_fetch_array($consulta)){
                                 return $cant= trim($row[0]);

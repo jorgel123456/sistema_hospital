@@ -32,6 +32,7 @@
             <tr>
                 <th>N°</th>
                 <th>Usuario</th>
+                <th>Correo</th>
                 <th>Rol</th>
                 <th>Sexo</th>
                 <th>Estatus</th>
@@ -45,6 +46,7 @@
             <tr>
                 <th>N°</th>
                 <th>Usuario</th>
+                <th>Correo</th>
                 <th>Rol</th>
                 <th>Sexo</th>
                 <th>Estatus</th>
@@ -70,6 +72,17 @@
             <label for="">Usuario</label>
             <input type="text" class="form-control" id="txtUsuario" placeholder="Ingrese el Usuario">
           </div>
+          <div class="col-lg-12">
+            <label for="">Correo</label>
+            <input type="text" class="form-control" id="txtCorreo" placeholder="Ingrese un Correo">
+            
+          </div>
+
+          <div style="margin: 0 1.5rem">
+          <label for="" id="correoOK" style="color:red "></label>
+          <input type="text" id="validarCorreo" hidden>
+          </div>
+      
           <div class="col-lg-12">
             <label for="">Contraseña</label>
             <input type="password" class="form-control" id="txtContrasena" placeholder="Ingrese la Contraseña">
@@ -143,7 +156,27 @@
   </div>
 </form>
   
+
+
 <script>
+
+    document.getElementById('txtCorreo').addEventListener('input',function(){
+      campo = event.target;
+      emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+      if(emailRegex.test(campo.value)){
+        $(this).css('border','')
+        $('#correoOK').html('')
+        $('#validarCorreo').val('correcto')
+      }else{
+        $(this).css('border','1px solid red')
+        $('#correoOK').html('Correo incorrecto')
+        $('#validarCorreo').val('incorrecto')
+      }
+    })
+
+
+
     $(document).ready( ()=>{
 
         listarUsuario();

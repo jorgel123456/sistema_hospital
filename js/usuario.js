@@ -126,6 +126,7 @@ function listarUsuario(){
        "columns":[
            {"data":"posicion"},
            {"data":"nombre"},
+           {"data":"correo"},
            {"data":"nombre_rol"},
            {"data":"sexo",
            render: function (data, type, row ) {
@@ -353,12 +354,17 @@ function registrarUsuario(){
     var contrasena2=document.getElementById("txtContrasena2").value
     var sexo=document.getElementById("cbm_sexo").value
     var rol=document.getElementById("cbm_rol").value
+    var correo=document.getElementById("txtCorreo").value
+    var validarCorreo=document.getElementById('validarCorreo').value
 
-    if(usuario.length==0 || contrasena.length==0 || contrasena2==0|| sexo.length==0 || rol.length==0){
+    if(usuario.length==0 || contrasena.length==0 || contrasena2==0|| sexo.length==0 || rol.length==0 || correo.length==0){
         return Swal.fire("Mensaje de Advertencia","Todos los campos son obligatorios","warning")
     }
     if(contrasena!=contrasena2){
         return Swal.fire("Mensaje de Advertencia","Las Contraseña deben coincidir","warning")
+    }
+    if(validarCorreo=='incorrecto'){
+        return Swal.fire("Mensaje de Advertencia","Escribir un formato de correo correcto","warning")
     }
 
     $.ajax({
@@ -368,7 +374,8 @@ function registrarUsuario(){
             usuario,
             contrasena,
             sexo,
-            rol
+            rol,
+            correo
         }
     }).done(resp => {
         if(resp>0){
